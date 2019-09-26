@@ -1,28 +1,48 @@
 import React, { Component } from 'react';
 
 class WordOutput extends Component {
-    render(){
+
+    // puzzleGrid = (x) => {
+    //     for (let i = 0; i < 15; i++) {
+    //         <li>"PuzzleGrid"</li>
+    //     }
+    // }
+
+    render() {
 
         let puzzle = this.props.puzzle.split(' ');
 
+        let searchTerm = 'A';
+
+        // let PuzzleGrid = this.puzzleGrid(puzzle);
+
         let PuzzleOut = puzzle.map((letter) => {
 
-            if (letter == "A"){
+            if (letter === searchTerm){
                 return (
                     <li>{letter}</li>
                 )
             }
             else {
                 return (
-                    <li>"Not a"</li>
+                    <li>.</li>
                 )
             }
-            
+
         });
 
-        return(
-            
-            <ul>{PuzzleOut} </ul>
+        
+
+        // let PuzzleOut = puzzle.join('').includes(searchTerm);
+
+        // let PuzzleOut = 
+
+        return (
+
+            <div>
+                {/* <ul>{PuzzleGrid}</ul> */}
+                <ul>{PuzzleOut}</ul>
+            </div>
         )
     }
 }
