@@ -17,17 +17,20 @@ class WordOutput extends Component {
         // let PuzzleGrid = this.puzzleGrid(puzzle);
 
         let PuzzleOut = puzzle.map((letter) => {
-
-            if (letter === searchTerm){
-                return (
-                    <li>{letter}</li>
-                )
-            }
-            else {
-                return (
-                    <li>.</li>
-                )
-            }
+            return (
+                <li>{letter}</li>
+            )
+            
+            // if (letter === searchTerm){
+            //     return (
+            //         <li>{letter}</li>
+            //     )
+            // }
+            // else {
+            //     return (
+            //         <li>.</li>
+            //     )
+            // }
 
         });
 
