@@ -24,10 +24,10 @@ class WordFind extends Component {
 
         let matrix = [[]];
         // let l = input[i];
-        
+
         // let s = new char[row][column]; 
 
-        
+
         if (row * column < puzzLength) {
             row = column;
         }
@@ -35,21 +35,21 @@ class WordFind extends Component {
         // Convert String into a two dimensional grid
         for (let i = 0; i < row; i++) {
             for (let j = 0; j < column; j++) {
-                
-                if (k < puzzLength){
+
+                if (k < puzzLength) {
                     // s[i][j] = input.charAt(k);
-                    
+
                     input[i] = input[k]
                     input[j] = input[k]
-                    
-                    if (i === 0 && j < puzzLength){
+
+                    if (i === 0 && j < puzzLength) {
                         matrix[0].push(input[k])
                         console.log('if (i === 0 && j < puzzLength): matrix[0]', matrix[0]);
                         // continue
                     }
-                    else if (i > 0 && j === 0){
+                    else if (i > 0 && j === 0) {
                         matrix.push([])
-                        l ++
+                        l++
                         matrix[l].push(input[k])
                         console.log('else if (i > 0 && j === 0): matrix[l]', matrix[l]);
                         // continue
@@ -59,34 +59,34 @@ class WordFind extends Component {
                         console.log('else matrix[l].push(input[k]): matrix[l]', matrix[l]);
                         // continue
                     }
-                    
+
                     console.log('letter is', input[i], 'at (', i, ',', j, '); Check (input[j]:', input[j], ';');
-                    console.log('k', k, ';', 'input[k]', input[k], ';' );
-                    console.log('l', l, ';', 'matrix[l]', matrix[l], ';' );
+                    console.log('k', k, ';', 'input[k]', input[k], ';');
+                    console.log('l', l, ';', 'matrix[l]', matrix[l], ';');
                     console.log('matrix', matrix);
-                    k++; 
+                    k++;
                     console.log('_________________________________')
                 }
             }
-            
+
         }
-            this.setState({ displayPuzzle: true, });
-            this.puzzleDom(matrix);
-            this.wordCheck(matrix);
+        this.setState({ displayPuzzle: true, });
+        this.puzzleDom(matrix);
+        this.wordCheck(matrix);
     } // end function puzzleDisplay
 
     puzzleDom = (matrix) => {
         console.log('puzzleDom', matrix);
-        
+
         matrix.map((letter, i) => {
             return (
                 <span key={i}>letter</span>
             )
-            
+
         })
 
-        
-        
+
+
 
         // for (let i = 0; i < row; i++) {
         //     for (let j = 0; j < column; j++) {
@@ -98,44 +98,54 @@ class WordFind extends Component {
         //         else {
         //             console.log('i', input[i], 'j', input[j]);
         //         }
-                
+
         //     }
         //     // console.log('');
         // }
-        
+
     } // end function puzzleDom
 
-    switch () {
+    switch() {
         this.setState({ displayPuzzle: false, })
     }
 
     // check to see if word is in matrix
-    wordCheck (matrix) {
-        console.log('matrix[5]', matrix[5]);
-        let matrixString = matrix[5].join('');
-        console.log('matrixString', matrixString);
-        let arrayOfTestWords = ['WBRG', 'GAS', 'SAG', 'BROKER'];
-        let stringReverse = matrixString.split('').reverse().join('')
-        console.log('stringReverse', stringReverse)
+    wordCheck(matrix) {
+        console.log('matrix', matrix);
+        // let matrixString = matrix.join('');
+        // console.log('matrixString', matrixString);
+        let arrayOfTestWords = ['GAS', 'SAG', 'BROKER', 'RIPE', 'BLEU', 'BOY', 'WOOD', 'GARAGE'];
+        // let stringReverse = matrixString.split('').reverse().join('')
+        // console.log('stringReverse', stringReverse)
         // let match = matrixString.match('BROKER');
         // console.log('match:', match);
 
 
-        for (let i=0; i<arrayOfTestWords.length; i++){
-        console.log('arrayOfTestWords.length', arrayOfTestWords.length);
-        console.log('loop#', i, 'a');
-            if (matrixString.match(arrayOfTestWords[i])){
-                console.log('loop#', i, 'b');
-                
-                    console.log('loop match:', matrixString.match(arrayOfTestWords[i]))
-                
+        for (let i = 0; i < matrix.length; i++) {
+            let matrixString = matrix[i].join('');
+            console.log('matrixString[i]', matrixString);
+            let stringReverse = matrixString.split('').reverse().join('')
+            console.log('stringReverse', stringReverse);
+            console.log('arrayOfTestWords.length', arrayOfTestWords.length);
+            console.log('i loop#', i, 'a');
+
+            for (let j = 0; j < arrayOfTestWords.length; j++) {
+                if (matrixString.match(arrayOfTestWords[j])) {
+                    console.log('i loop#', i, 'b');
+                    console.log('j loop#', j, 'c');
+                    console.log('loop match:', matrixString.match(arrayOfTestWords[j]))
+
+                }
+                if (stringReverse.match(arrayOfTestWords[j])) {
+                    console.log('i loop#', i, 'd');
+                    console.log('j loop#', j, 'e');
+                    console.log('reverse loop match', stringReverse.match(arrayOfTestWords[j]))
+                }
             }
-            if (stringReverse.match(arrayOfTestWords[i])){
-                console.log('loop#', i, 'c');
-                
-                    console.log('reverse loop match', stringReverse.match(arrayOfTestWords[i]))
-                
-            }
+            // for (let j = 0; j < matrix.length; j++) {
+            //     console.log('j loop#', j, 'c');
+            // }
+            console.log('_________________________________________');
         }
     }
 
@@ -151,7 +161,7 @@ class WordFind extends Component {
                 <p>
                     <Button
                         onClick={() => this.puzzleDisplay(puzzle)}
-                        
+
                     >Run Program</Button>
                     {/* {puzzle} */}
                     <WordOutput
