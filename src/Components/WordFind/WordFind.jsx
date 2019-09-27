@@ -9,8 +9,6 @@ class WordFind extends Component {
     state = {
         displayPuzzle: false,
     }
-    // let row = [];
-    // let column = [];
 
     puzzleDisplay = (input) => {
 
@@ -23,11 +21,7 @@ class WordFind extends Component {
         console.log('column', column);
 
         let matrix = [[]];
-        // let l = input[i];
-
-        // let s = new char[row][column]; 
-
-
+        
         if (row * column < puzzLength) {
             row = column;
         }
@@ -86,23 +80,6 @@ class WordFind extends Component {
         })
 
 
-
-
-        // for (let i = 0; i < row; i++) {
-        //     for (let j = 0; j < column; j++) {
-        //         if (j == 0 && i == 0) {
-        //             return (
-        //             <br />
-        //             )
-        //         }
-        //         else {
-        //             console.log('i', input[i], 'j', input[j]);
-        //         }
-
-        //     }
-        //     // console.log('');
-        // }
-
     } // end function puzzleDom
 
     switch() {
@@ -112,15 +89,8 @@ class WordFind extends Component {
     // check to see if word is in matrix
     wordCheck(matrix) {
         console.log('matrix', matrix);
-        // let matrixString = matrix.join('');
-        // console.log('matrixString', matrixString);
         let arrayOfTestWords = ['GAS', 'SAG', 'BROKER', 'RIPE', 'BLEU', 'BOY', 'WOOD', 'GARAGE'];
-        // let stringReverse = matrixString.split('').reverse().join('')
-        // console.log('stringReverse', stringReverse)
-        // let match = matrixString.match('BROKER');
-        // console.log('match:', match);
-
-
+ 
         for (let i = 0; i < matrix.length; i++) {
             let matrixString = matrix[i].join('');
             console.log('matrixString[i]', matrixString);
@@ -142,9 +112,6 @@ class WordFind extends Component {
                     console.log('reverse loop match', stringReverse.match(arrayOfTestWords[j]))
                 }
             }
-            // for (let j = 0; j < matrix.length; j++) {
-            //     console.log('j loop#', j, 'c');
-            // }
             console.log('_________________________________________');
         }
     }
@@ -152,9 +119,7 @@ class WordFind extends Component {
     render() {
 
         let puzzleData = "A T L L F U V D E Y O B Z V D W F B N E D X G H E A N P O R O T V B Y L A L G T D K E A A D O O W D R A H H E L A S P Z A P P E A K H R O F X W L X O W B R G A S O M M B R O K E R M C X G X O U I E O K M Y K W A O E F M R S L S N L R S I I S N P D B C E Q P R I U K U Q T E G R I P E B O Q U I Q S C B P A S D Q P E T X J P S E S B R K R R E U E T T D Z D K L L B J B C B B L E U B I U R F L N H S F H T K R K G H Y A M O J H D N Q A J S Q P L R M U";
-        // let puzzleData = "A T L L F U V D E Y O B Z V D W";
         let puzzle = puzzleData.split(' ');
-        // let puzzleSplice;
 
         if (this.state.displayPuzzle === false) {
             return (
