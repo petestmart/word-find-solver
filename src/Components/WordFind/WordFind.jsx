@@ -114,16 +114,27 @@ class WordFind extends Component {
         console.log('matrix[5]', matrix[5]);
         let matrixString = matrix[5].join('');
         console.log('matrixString', matrixString);
-        let arrayOfTestWords = ['BROKER', 'WBRG', 'GAS'];
-        let match = matrixString.match('BROKER');
-        console.log('match:', match);
+        let arrayOfTestWords = ['WBRG', 'GAS', 'SAG', 'BROKER'];
+        let stringReverse = matrixString.split('').reverse().join('')
+        console.log('stringReverse', stringReverse)
+        // let match = matrixString.match('BROKER');
+        // console.log('match:', match);
 
 
         for (let i=0; i<arrayOfTestWords.length; i++){
+        console.log('arrayOfTestWords.length', arrayOfTestWords.length);
+        console.log('loop#', i, 'a');
             if (matrixString.match(arrayOfTestWords[i])){
-                return (
-                    console.log('arrayOfTestWords', arrayOfTestWords)
-                )
+                console.log('loop#', i, 'b');
+                
+                    console.log('loop match:', matrixString.match(arrayOfTestWords[i]))
+                
+            }
+            if (stringReverse.match(arrayOfTestWords[i])){
+                console.log('loop#', i, 'c');
+                
+                    console.log('reverse loop match', stringReverse.match(arrayOfTestWords[i]))
+                
             }
         }
     }
