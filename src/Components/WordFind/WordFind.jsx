@@ -18,8 +18,11 @@ class WordFind extends Component {
         let row = Math.floor(Math.sqrt(puzzLength));
         console.log('row', row);
         let column = Math.ceil(Math.sqrt(puzzLength));
-        let k = 0
+        let k = 0;
+        let l = 0;
         console.log('column', column);
+
+        let matrix = [[]];
         // let l = input[i];
         
         // let s = new char[row][column]; 
@@ -35,30 +38,71 @@ class WordFind extends Component {
                 
                 if (k < puzzLength){
                     // s[i][j] = input.charAt(k);
+                    
                     input[i] = input[k]
                     input[j] = input[k]
                     
-                    console.log('i is', input[i], 'at i', i, ';', 'j is', input[j], 'at j', j, ';');
+                    if (i === 0 && j < puzzLength){
+                        matrix[0].push(input[k])
+                        console.log('if (i === 0 && j < puzzLength): matrix[0]', matrix[0]);
+                        // continue
+                    }
+                    else if (i > 0 && j === 0){
+                        matrix.push([])
+                        l ++
+                        matrix[l].push(input[k])
+                        console.log('else if (i > 0 && j === 0): matrix[l]', matrix[l]);
+                        // continue
+                    }
+                    else {
+                        matrix[l].push(input[k])
+                        console.log('else matrix[l].push(input[k]): matrix[l]', matrix[l]);
+                        // continue
+                    }
+                    
+                    console.log('letter is', input[i], 'at (', i, ',', j, '); Check (input[j]:', input[j], ';');
                     console.log('k', k, ';', 'input[k]', input[k], ';' );
+                    console.log('l', l, ';', 'matrix[l]', matrix[l], ';' );
+                    console.log('matrix', matrix);
                     k++; 
+                    console.log('_________________________________')
                 }
             }
+            
         }
-
-        for (let i = 0; i < row; i++) {
-            for (let j = 0; j < column; i++) {
-                if (j == 0) {
-                    break
-                }
-                if (i == 0) {
-                    break
-                }
-                console.log('i', input[i], 'j', input[j]);
-            }
-            console.log('');
-        }
-        this.setState({ displayPuzzle: true, })
+            this.setState({ displayPuzzle: true, })
+            this.puzzleDom(matrix)
     } // end function puzzleDisplay
+
+    puzzleDom = (matrix) => {
+        console.log('puzzleDom', matrix);
+        
+        matrix.map((letter, i) => {
+            return (
+                <span key={i}>letter</span>
+            )
+            
+        })
+
+        
+        
+
+        // for (let i = 0; i < row; i++) {
+        //     for (let j = 0; j < column; j++) {
+        //         if (j == 0 && i == 0) {
+        //             return (
+        //             <br />
+        //             )
+        //         }
+        //         else {
+        //             console.log('i', input[i], 'j', input[j]);
+        //         }
+                
+        //     }
+        //     // console.log('');
+        // }
+        
+    } // end function puzzleDom
 
     switch () {
         this.setState({ displayPuzzle: false, })
@@ -92,7 +136,7 @@ class WordFind extends Component {
                     <Button
                         onClick={() => this.switch()}
                     >Hide</Button>
-                    {this.puzzleDisplay}
+                    {this.puzzleDom}
                     {/* {puzzle} */}
                     <WordOutput
                         puzzle={puzzleData}
@@ -102,34 +146,6 @@ class WordFind extends Component {
 
             )
         }
-
-
-        // puzzle.map((letter, i) => {
-
-        //     if (i < Math.floor(Math.sqrt(puzzle.length))) {
-
-        //         row.push({ letter })
-        //         console.log('row', row)
-        //     }
-        //     if (i === Math.floor(Math.sqrt(puzzle.length))) {
-
-        //         column.push(row);
-        //         console.log('column', column);
-        //         let puzzleSplice = puzzle.splice(0, Math.floor(Math.sqrt(puzzle.length)))
-        //         console.log('spliced puzzle', puzzle)
-        //         puzzleDisplay(puzzleSplice)
-        //     }
-        //     if (puzzle.length < Math.floor(Math.sqrt(puzzle.length))){
-        //         row.push({letter})
-
-        //     }
-
-
-
-        // })
-
-
-
     }
 }
 
