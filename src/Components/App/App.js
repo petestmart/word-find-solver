@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import WordFind from '../WordFind/WordFind';
 
@@ -19,4 +20,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);
