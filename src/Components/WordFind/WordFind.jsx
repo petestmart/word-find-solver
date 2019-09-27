@@ -70,8 +70,9 @@ class WordFind extends Component {
             }
             
         }
-            this.setState({ displayPuzzle: true, })
-            this.puzzleDom(matrix)
+            this.setState({ displayPuzzle: true, });
+            this.puzzleDom(matrix);
+            this.wordCheck(matrix);
     } // end function puzzleDisplay
 
     puzzleDom = (matrix) => {
@@ -106,6 +107,25 @@ class WordFind extends Component {
 
     switch () {
         this.setState({ displayPuzzle: false, })
+    }
+
+    // check to see if word is in matrix
+    wordCheck (matrix) {
+        console.log('matrix[5]', matrix[5]);
+        let matrixString = matrix[5].join('');
+        console.log('matrixString', matrixString);
+        let arrayOfTestWords = ['BROKER', 'WBRG', 'GAS'];
+        let match = matrixString.match('BROKER');
+        console.log('match:', match);
+
+
+        for (let i=0; i<arrayOfTestWords.length; i++){
+            if (matrixString.match(arrayOfTestWords[i])){
+                return (
+                    console.log('arrayOfTestWords', arrayOfTestWords)
+                )
+            }
+        }
     }
 
     render() {
