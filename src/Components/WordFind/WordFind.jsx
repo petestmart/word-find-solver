@@ -8,7 +8,10 @@ class WordFind extends Component {
 
     state = {
         displayPuzzle: false,
+        // m: 0,
     }
+    
+    
 
     puzzleDisplay = (input) => {
 
@@ -16,8 +19,10 @@ class WordFind extends Component {
         let row = Math.floor(Math.sqrt(puzzLength));
         console.log('row', row);
         let column = Math.ceil(Math.sqrt(puzzLength));
-        let k = 0;
-        let l = 0;
+        let k = 0; // keeps count of the letters as they are looped
+        let l = 0; // keeps count of the rows in the matrix and they are looped
+        let m = 0; // keeps count of the columns in vertMatrix as letters are added in loops
+        let vertMatrix = [];
         console.log('column', column);
 
         let matrix = [[]];
@@ -26,39 +31,53 @@ class WordFind extends Component {
             row = column;
         }
 
-        // Convert String into a two dimensional grid
+        // Convert String into a two dimensional matrix
         for (let i = 0; i < row; i++) {
             for (let j = 0; j < column; j++) {
-
+               
                 if (k < puzzLength) {
-                    // s[i][j] = input.charAt(k);
-
+                    
                     input[i] = input[k]
                     input[j] = input[k]
+                    
+                    if (m === column) {
+                        console.log('reset');
+                        m = 0;
+                        // this.setState({m: 0})
+                    }
 
                     if (i === 0 && j < puzzLength) {
                         matrix[0].push(input[k])
                         console.log('if (i === 0 && j < puzzLength): matrix[0]', matrix[0]);
-                        // continue
+                        vertMatrix.push([]);
+                        vertMatrix[m].push(input[k]);
                     }
                     else if (i > 0 && j === 0) {
                         matrix.push([])
                         l++
                         matrix[l].push(input[k])
+                        vertMatrix[m].push(input[k]);
                         console.log('else if (i > 0 && j === 0): matrix[l]', matrix[l]);
-                        // continue
+                        
                     }
                     else {
                         matrix[l].push(input[k])
+                        vertMatrix[m].push(input[k]);
                         console.log('else matrix[l].push(input[k]): matrix[l]', matrix[l]);
-                        // continue
+                        console.log('else vertMatrix[l].push(input[k]): vertMatrix[l]', vertMatrix[l]);
+                        
                     }
-
+                    // vertMatrix[i].push(input[k]);
+                    
                     console.log('letter is', input[i], 'at (', i, ',', j, '); Check (input[j]:', input[j], ';');
                     console.log('k', k, ';', 'input[k]', input[k], ';');
                     console.log('l', l, ';', 'matrix[l]', matrix[l], ';');
                     console.log('matrix', matrix);
+                    console.log('vertMatrix[l]', vertMatrix[l]);
+                    console.log('vertMatrix', vertMatrix)
+                    console.log('m', m);
                     k++;
+                    m++;
                     console.log('_________________________________')
                 }
             }
@@ -67,6 +86,7 @@ class WordFind extends Component {
         this.setState({ displayPuzzle: true, });
         this.puzzleDom(matrix);
         this.wordCheck(matrix);
+        this.wordCheck(vertMatrix);
     } // end function puzzleDisplay
 
     puzzleDom = (matrix) => {
@@ -74,12 +94,9 @@ class WordFind extends Component {
 
         matrix.map((letter, i) => {
             return (
-                <span key={i}>letter</span>
+                <span key={i}>{letter}</span>
             )
-
         })
-
-
     } // end function puzzleDom
 
     switch() {
@@ -89,8 +106,8 @@ class WordFind extends Component {
     // check to see if word is in matrix
     wordCheck(matrix) {
         console.log('matrix', matrix);
-        let arrayOfTestWords = ['GAS', 'SAG', 'BROKER', 'RIPE', 'BLEU', 'BOY', 'WOOD', 'GARAGE'];
- 
+        let arrayOfTestWords = ['GAS', 'SAG', 'BROKER', 'RIPE', 'BLEU', 'BOY', 'WOOD', 'GARAGE', 'RAZOR', 'HOME', 'MARK'];
+        // expect 10 out of 11 words found
         for (let i = 0; i < matrix.length; i++) {
             let matrixString = matrix[i].join('');
             console.log('matrixString[i]', matrixString);
