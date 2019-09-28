@@ -89,8 +89,12 @@ class WordFind extends Component {
             }
         }
         // this.setState({ displayPuzzle: true, });
+        // adding the array of vertical words to the matrix array
+        for (let n=0; n<vertMatrix.length; n++){
+            matrix.push(vertMatrix[n])
+        }
         this.wordCheck(matrix);
-        this.wordCheck(vertMatrix);
+        // this.wordCheck(vertMatrix);
     } // end function puzzleDisplay
 
     switch() {
@@ -100,7 +104,7 @@ class WordFind extends Component {
     // check to see if word is in matrix
     wordCheck(matrix) {
         console.log('matrix', matrix);
-        let arrayOfTestWords = ['GAS', 'SAG', 'BROKER', 'RIPE', 'BLEU', 'BOY', 'WOOD', 'GARAGE', 'RAZOR', 'HOME', 'MARK', 'COW', 'KITE', 'BALLOON', 'MOUSE'];
+        let arrayOfWords = ['GAS', 'SAG', 'BROKER', 'RIPE', 'BLEU', 'BOY', 'WOOD', 'GARAGE', 'RAZOR', 'HOME', 'MARK', 'COW', 'KITE', 'BALLOON', 'MOUSE'];
         let wordsMatch = [];
         // expect 10 words found
         for (let i = 0; i < matrix.length; i++) {
@@ -108,34 +112,39 @@ class WordFind extends Component {
             console.log('matrixString[i]', matrixString);
             let stringReverse = matrixString.split('').reverse().join('')
             console.log('stringReverse', stringReverse);
-            console.log('arrayOfTestWords.length', arrayOfTestWords.length);
+            console.log('arrayOfWords.length', arrayOfWords.length);
             console.log('i loop#', i, 'a');
 
-            for (let j = 0; j < arrayOfTestWords.length; j++) {
-                if (matrixString.match(arrayOfTestWords[j]) ){
-                    let match = arrayOfTestWords[j];
+            for (let j = 0; j < arrayOfWords.length; j++) {
+                if (arrayOfWords[j].length < 4){
+                    console.log('less than 4 characters', arrayOfWords[j])
+                    arrayOfWords.splice(j, 1)
+                    console.log('arrayOfWords', arrayOfWords)
+                }
+                if (matrixString.match(arrayOfWords[j]) ){
+                    let match = arrayOfWords[j];
                     wordsMatch.push(match);
                     console.log('i loop#', i, 'b');
                     console.log('j loop#', j, 'c');
-                    console.log('loop match:', matrixString.match(arrayOfTestWords[j]));
+                    console.log('loop match:', matrixString.match(arrayOfWords[j]));
                     console.log('wordsMatch', wordsMatch);
-                    this.setState({ ...this.state.wordsMatch, wordsMatch });
+                    // this.setState({ ...this.state.wordsMatch, wordsMatch });
                 }
-                if (stringReverse.match(arrayOfTestWords[j])) {
-                    let match = arrayOfTestWords[j];
+                if (stringReverse.match(arrayOfWords[j])) {
+                    let match = arrayOfWords[j];
                     wordsMatch.push(match);
                     console.log('wordsMatch', wordsMatch);
                     console.log('i loop#', i, 'd');
                     console.log('j loop#', j, 'e');
-                    console.log('reverse loop match', stringReverse.match(arrayOfTestWords[j]));
-                    this.setState({ ...this.state.wordsMatch, wordsMatch: match });
-                    console.log('state', this.state);
+                    console.log('reverse loop match', stringReverse.match(arrayOfWords[j]));
+                    // this.setState({ ...this.state.wordsMatch, wordsMatch: match });
+                    // console.log('state', this.state);
                 }
             }
             console.log('_________________________________________');
         }
         
-        this.props.dispatch({ type: 'STORE_WORDS', payload: [...this.state, wordsMatch] })
+        this.props.dispatch({ type: 'STORE_WORDS', payload: wordsMatch })
     }// end function wordCheck
 
     // sendToRedux(wordsMatch){
