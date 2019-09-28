@@ -94,9 +94,7 @@ class WordOutput extends Component {
         return (
             
             <div>
-                <Button
-                    onClick={() => this.renderWords()}
-                >Redux Button</Button>
+                
                 
                 <ul>{wordOut}</ul>
                 {this.conditionalFoundNames}
