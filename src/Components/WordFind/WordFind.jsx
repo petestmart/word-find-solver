@@ -24,7 +24,7 @@ class WordFind extends Component {
 
     handleChange = (event) => {
         console.log('Input Word Find', event.target.value);
-        let puzzleInput = event.target.value
+        let puzzleInput = event.target.value.toLowerCase()
         this.setState({
             puzzleInput: puzzleInput
         })
@@ -101,6 +101,7 @@ class WordFind extends Component {
         // this.setState({ displayPuzzle: true, });
         // adding the array of vertical words to the matrix array
         for (let n=0; n<vertMatrix.length; n++){
+            
             matrix.push(vertMatrix[n])
         }
         this.wordCheck(matrix);
@@ -114,7 +115,7 @@ class WordFind extends Component {
     // check to see if word is in matrix
     wordCheck(matrix) {
         console.log('matrix', matrix);
-        let arrayOfWords = ['GAS', 'SAG', 'BROKER', 'RIPE', 'BLEU', 'BOY', 'WOOD', 'GARAGE', 'RAZOR', 'HOME', 'MARK', 'COW', 'KITE', 'BALLOON', 'MOUSE'];
+        let arrayOfWords = ['gas', 'sag', 'broker', 'ripe', 'bleu', 'boy', 'wood', 'garage', 'razor', 'home', 'mark', 'cow', 'kite', 'balloon', 'mouse'];
         let wordsMatch = [];
         // expect 10 words found
         for (let i = 0; i < matrix.length; i++) {
