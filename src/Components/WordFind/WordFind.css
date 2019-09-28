@@ -5,3 +5,7 @@ ul {
 li {
     justify-content: left;
 }
+
+Button {
+    display: inline-block;
+}
