@@ -1,9 +1,16 @@
+// WordFind.jsx
+// Child of App.js
+
+// ========== REACT ========== //
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import WordOutput from './WordOutput';
-import './WordFind.css'
-import Button from '@material-ui/core/Button';
 
+// ========== COMPONENTS ========== //
+import WordOutput from './WordOutput';
+
+// ========== STYLES ========== //
+import Button from '@material-ui/core/Button';
+import './WordFind.css'
 
 class WordFind extends Component {
 
@@ -41,7 +48,7 @@ class WordFind extends Component {
                     if (m === column) {
                         console.log('reset');
                         m = 0;
-                        // this.setState({m: 0})
+                        
                     }
 
                     if (i === 0 && j < puzzLength) {
@@ -127,6 +134,10 @@ class WordFind extends Component {
             }
             console.log('_________________________________________');
         }
+        this.setState({
+            storeWords: 'test',
+        })
+        this.props.dispatch({type: 'STORE_WORDS', payload: ['test']})
     }
 
     render() {
@@ -171,10 +182,8 @@ class WordFind extends Component {
     }
 }
 
-const mapStateToProps = (reduxState) => {
-    return (
-        reduxState
-    )
-}
+const mapStateToProps = (reduxState) => ({
+        reduxState  
+})
 
 export default connect(mapStateToProps)(WordFind);

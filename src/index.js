@@ -4,18 +4,17 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
-import './index.css';
-// import registerServiceWorker from './registerServiceWorker';
+
 import rootReducer from './redux/reducers'; // imports ./redux/reducers/index.js
 // import rootSaga from './redux/sagas'; // imports ./redux/sagas/index.js
+
 import App from './Components/App/App';
-import * as serviceWorker from './serviceWorker';
 
 const sagaMiddleware = createSagaMiddleware();
 
 // this line creates an array of all of redux middleware you want to use
 // we don't want a whole ton of console logs in our production code
-// logger will only be added to your project if you're in development mode
+// logger will only be added to your project if your in development mode
 const middlewareList = process.env.NODE_ENV === 'development' ?
     [sagaMiddleware, logger] :
     [sagaMiddleware];
@@ -28,11 +27,13 @@ const store = createStore(
     applyMiddleware(...middlewareList),
 );
 
-ReactDOM.render(
-    <Provider store={store}><App /></Provider>, 
-    document.getElementById('root'));
+// tells the saga middleware to use the rootSaga
+// rootSaga contains all of our other sagas
+// sagaMiddleware.run(rootSaga);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('react-root'),
+);
