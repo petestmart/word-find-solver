@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import dictionaryReducer from './dictionaryReducer';
 
 const wordReducer = (state = [], action) => {
     if (action.type === 'STORE_WORDS') {
@@ -9,6 +10,8 @@ const wordReducer = (state = [], action) => {
     }
 };
 
+
+
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -17,7 +20,7 @@ const wordReducer = (state = [], action) => {
 // This is what we get when we use 'state' inside of 'mapStateToProps'
 const rootReducer = combineReducers({
     wordReducer,
-    
+    dictionaryReducer,
 });
 
 export default rootReducer;
